@@ -10,8 +10,13 @@ const WeglotScript: React.FC = () => {
     if (window.Weglot !== undefined) {
       console.debug('Weglot object found:', window.Weglot);
 
+      const apiKey = process.env.NEXT_PUBLIC_WEGLOT_API_KEY;
+      if (!apiKey) {
+        console.error('Weglot API key is missing. Please set NEXT_PUBLIC_WEGLOT_API_KEY in your environment.');
+        return;
+      }
       window.Weglot.initialize({
-        api_key: process.env.NEXT_PUBLIC_WEGLOT_API_KEY!,
+        api_key: apiKey,
         hide_switcher: true,
       });
 
