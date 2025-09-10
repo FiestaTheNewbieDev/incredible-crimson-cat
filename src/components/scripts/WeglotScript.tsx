@@ -7,7 +7,7 @@ const WeglotScript: React.FC = () => {
     console.debug('Weglot script loaded');
     console.debug('Weglot API Key:', process.env.NEXT_PUBLIC_WEGLOT_API_KEY);
 
-    if (window !== undefined && window.Weglot !== undefined) {
+    if (window.Weglot !== undefined) {
       console.debug('Weglot object found:', window.Weglot);
 
       window.Weglot.initialize({
