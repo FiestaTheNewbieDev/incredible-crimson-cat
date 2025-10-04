@@ -14,6 +14,9 @@ jobs:
     environment: production
 
     steps:
+      - name: 🔄 Checkout repository
+        uses: actions/checkout@v4
+
       - name: 🚀 Deploy to Vercel Production
         uses: amondnet/vercel-action@v25
         with:
