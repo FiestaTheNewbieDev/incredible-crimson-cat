@@ -17,12 +17,14 @@ jobs:
       - name: 🔄 Checkout repository
         uses: actions/checkout@v4
 
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
       - name: 🚀 Deploy to Vercel Production
-        uses: amondnet/vercel-action@v25
+        uses: ./.github/actions/vercel-deployment
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod --local-config vercel.production.json'
-          # github-ref: ${{ github.event.workflow_run.head_branch }}
-          working-directory: ./
+          environment: 'production'

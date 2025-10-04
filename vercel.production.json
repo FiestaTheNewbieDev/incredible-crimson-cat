@@ -9,8 +9,8 @@
     "NODE_ENV": "production"
   },
   "functions": {
-    "src/app/**/*.{js,ts,tsx}": {
-      "runtime": "nodejs20.x"
+    "app/**/*.{js,ts,tsx}": {
+      "runtime": "nodejs22.x"
     }
   },
   "headers": [
