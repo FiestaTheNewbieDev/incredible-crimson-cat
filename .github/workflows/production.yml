@@ -1,0 +1,25 @@
+name: Production Deployment
+
+on:
+  workflow_run:
+    workflows: ['CI']
+    types:
+      - completed
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment: production
+
+    steps:
+      - name: 🚀 Deploy to Vercel Production
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod --local-config vercel.production.json'
+          # github-ref: ${{ github.event.workflow_run.head_branch }}
+          working-directory: ./
